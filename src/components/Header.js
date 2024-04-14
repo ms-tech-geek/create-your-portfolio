@@ -1,34 +1,34 @@
-import React, { useEffect, useRef } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import React, { useEffect, useRef } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import {
   faGithub,
   faLinkedin,
   faMedium,
   faStackOverflow,
-} from "@fortawesome/free-brands-svg-icons";
-import { Box, HStack } from "@chakra-ui/react";
+} from '@fortawesome/free-brands-svg-icons';
+import { Box, HStack } from '@chakra-ui/react';
 
 const socials = [
   {
     icon: faEnvelope,
-    url: "mailto: hello@example.com",
+    url: 'mailto: hello@example.com',
   },
   {
     icon: faGithub,
-    url: "https://github.com",
+    url: 'https://github.com',
   },
   {
     icon: faLinkedin,
-    url: "https://www.linkedin.com",
+    url: 'https://www.linkedin.com',
   },
   {
     icon: faMedium,
-    url: "https://medium.com",
+    url: 'https://medium.com',
   },
   {
     icon: faStackOverflow,
-    url: "https://stackoverflow.com",
+    url: 'https://stackoverflow.com',
   },
 ];
 
@@ -38,8 +38,8 @@ const Header = () => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
+        behavior: 'smooth',
+        block: 'start',
       });
     }
   };
@@ -64,11 +64,22 @@ const Header = () => {
           alignItems="center"
         >
           <nav>
-            {/* Add social media links based on the `socials` data */}
+            <HStack spacing={8}>
+              {socials.map((social, index) => (
+                <a key={index} href={social.link} aria-label={social.name}>
+                  <FontAwesomeIcon icon={social.icon} size="2x" />
+                </a>
+              ))}
+            </HStack>
           </nav>
           <nav>
             <HStack spacing={8}>
-              {/* Add links to Projects and Contact me section */}
+              <a href="/#projects" onClick={handleClick}>
+                Projects
+              </a>
+              <a href="/#contact-me" onClick={handleClick}>
+                Contact Me
+              </a>
             </HStack>
           </nav>
         </HStack>
