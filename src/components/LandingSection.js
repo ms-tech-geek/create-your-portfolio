@@ -19,15 +19,15 @@ const LandingSection = () => (
     <VStack spacing={10}>
       <VStack>
         <Avatar src={avatar.url} size="xl" />
-        <Heading as="h6" size="sm" noOfLines={1}>
+        <Heading as="h6" size="sm">
           {avatar.greeting}
         </Heading>
       </VStack>
       <VStack>
-        <Heading as="h4" size="xl" noOfLines={1}>
+        <Heading as="h4" size="xl">
           {avatar.bio1}
         </Heading>
-        <Heading as="h4" size="xl" noOfLines={1}>
+        <Heading as="h4" size="xl">
           {avatar.bio2}
         </Heading>
       </VStack>
