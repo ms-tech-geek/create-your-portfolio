@@ -62,43 +62,30 @@ const LandingSection = () => {
           <form onSubmit={formik.handleSubmit}>
             <VStack spacing={4}>
               <FormControl
-                isInvalid={formik.errors.firstName && formik.touched.firstName}
+                isInvalid={
+                  formik.touched.firstName && !!formik.errors.firstName
+                }
               >
                 <FormLabel htmlFor="firstName">Name</FormLabel>
-                <Input
-                  id="firstName"
-                  name="firstName"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.firstName}
-                />
+                <Input id="firstName" {...formik.getFieldProps('firstName')} />
                 <FormErrorMessage>{formik.errors.firstName}</FormErrorMessage>
               </FormControl>
               <FormControl
-                isInvalid={formik.errors.email && formik.touched.email}
+                isInvalid={formik.touched.email && !!formik.errors.email}
               >
                 <FormLabel htmlFor="email">Email Address</FormLabel>
                 <Input
                   id="email"
-                  name="email"
                   type="email"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.email}
+                  {...formik.getFieldProps('email')}
                 />
                 <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
               </FormControl>
               <FormControl
-                isInvalid={formik.errors.type && formik.touched.type}
+                isInvalid={formik.touched.type && !!formik.errors.type}
               >
                 <FormLabel htmlFor="type">Type of enquiry</FormLabel>
-                <Select
-                  id="type"
-                  name="type"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.type}
-                >
+                <Select id="type" {...formik.getFieldProps('type')}>
                   <option value="">Select type</option>
                   <option value="hireMe">Freelance project proposal</option>
                   <option value="openSource">
@@ -109,16 +96,13 @@ const LandingSection = () => {
                 <FormErrorMessage>{formik.errors.type}</FormErrorMessage>
               </FormControl>
               <FormControl
-                isInvalid={formik.errors.comment && formik.touched.comment}
+                isInvalid={formik.touched.comment && !!formik.errors.comment}
               >
                 <FormLabel htmlFor="comment">Your message</FormLabel>
                 <Textarea
                   id="comment"
-                  name="comment"
                   height={250}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.comment}
+                  {...formik.getFieldProps('comment')}
                 />
                 <FormErrorMessage>{formik.errors.comment}</FormErrorMessage>
               </FormControl>
@@ -137,5 +121,4 @@ const LandingSection = () => {
     </FullScreenSection>
   );
 };
-
 export default LandingSection;
