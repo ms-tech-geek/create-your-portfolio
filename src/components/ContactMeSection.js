@@ -20,7 +20,6 @@ import { useAlertContext } from '../context/alertContext';
 const LandingSection = () => {
   const { isLoading, response, submit } = useSubmit();
   const { onOpen } = useAlertContext();
-
   const formik = useFormik({
     initialValues: {
       firstName: '',
@@ -28,10 +27,12 @@ const LandingSection = () => {
       type: '',
       comment: '',
     },
-    onSubmit: (values, { setSubmitting }) => {
+    onSubmit: (values, { setSubmitting, resetForm }) => {
       submit(values, () => {
-        onOpen();
         setSubmitting(false);
+        if (response.type === 'success') {
+          resetForm();
+        }
       });
     },
     validationSchema: Yup.object({
@@ -42,10 +43,27 @@ const LandingSection = () => {
       type: Yup.string().required('Type of enquiry is required'),
       comment: Yup.string()
         .min(10, 'Minimum 10 characters')
-        .max(10, 'Maximum 100 characters')
+        .max(100, 'Maximum 100 characters')
         .required('Message is required'),
     }),
   });
+
+  useEffect(() => {
+    if (response) {
+      if (response.type === 'success') {
+        onOpen(
+          'success',
+          `Success! Thanks for your message, ${formik.values.firstName}.`
+        );
+        formik.resetForm();
+      } else if (response.type === 'error') {
+        onOpen(
+          'error',
+          response.message || 'An error occurred. Please try again.'
+        );
+      }
+    }
+  }, [response, onOpen, formik.resetForm, formik.values.firstName]);
 
   return (
     <FullScreenSection
@@ -110,7 +128,7 @@ const LandingSection = () => {
                 type="submit"
                 colorScheme="purple"
                 width="full"
-                isLoading={formik.isSubmitting}
+                isLoading={isLoading}
               >
                 Submit
               </Button>
