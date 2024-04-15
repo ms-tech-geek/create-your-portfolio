@@ -30,7 +30,7 @@ const LandingSection = () => {
     },
     onSubmit: (values, { setSubmitting }) => {
       submit(values, () => {
-        console.log(values);
+        onOpen();
         setSubmitting(false);
       });
     },
@@ -121,4 +121,5 @@ const LandingSection = () => {
     </FullScreenSection>
   );
 };
+
 export default LandingSection;
