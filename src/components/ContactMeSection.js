@@ -27,13 +27,9 @@ const LandingSection = () => {
       type: '',
       comment: '',
     },
-    onSubmit: (values, { setSubmitting, resetForm }) => {
-      submit(values, () => {
-        setSubmitting(false);
-        if (response.type === 'success') {
-          resetForm();
-        }
-      });
+    onSubmit: (values, { setSubmitting }) => {
+      submit(values);
+      setSubmitting(false);
     },
     validationSchema: Yup.object({
       firstName: Yup.string().required('Name is required'),
@@ -49,21 +45,11 @@ const LandingSection = () => {
   });
 
   useEffect(() => {
-    if (response) {
-      if (response.type === 'success') {
-        onOpen(
-          'success',
-          `Success! Thanks for your message, ${formik.values.firstName}.`
-        );
-        formik.resetForm();
-      } else if (response.type === 'error') {
-        onOpen(
-          'error',
-          response.message || 'An error occurred. Please try again.'
-        );
-      }
+    if (response?.type) {
+      onOpen(response.type, response.message);
+      formik.resetForm();
     }
-  }, [response, onOpen, formik.resetForm, formik.values.firstName]);
+  }, [response]);
 
   return (
     <FullScreenSection
