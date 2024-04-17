@@ -81,10 +81,10 @@ const Header = () => {
           alignItems="center"
         >
           <nav>
-            <HStack spacing={8}>
+            <HStack spacing={4}>
               {socials.map((social, index) => (
                 <a key={index} href={social.link} aria-label={social.name}>
-                  <FontAwesomeIcon icon={social.icon} size="2x" />
+                  <FontAwesomeIcon icon={social.icon} size="1x" />
                 </a>
               ))}
             </HStack>
