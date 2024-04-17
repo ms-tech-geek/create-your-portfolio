@@ -38,7 +38,7 @@ const LandingSection = () => {
         .required('Email is required'),
       type: Yup.string().required('Type of enquiry is required'),
       comment: Yup.string()
-        .min(10, 'Minimum 10 characters')
+        .min(25, 'Minimum 25 characters')
         .max(100, 'Maximum 100 characters')
         .required('Message is required'),
     }),
