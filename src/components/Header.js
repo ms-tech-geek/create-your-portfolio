@@ -50,9 +50,12 @@ const Header = () => {
     };
   }, []);
 
-  const handleClick = (anchor) => () => {
+  const handleClick = (anchor) => (event) => {
+    event.preventDefault();
     const id = `${anchor}-section`;
+    console.log('id', id);
     const element = document.getElementById(id);
+    console.log('element', element);
     if (element) {
       element.scrollIntoView({
         behavior: 'smooth',
@@ -83,7 +86,7 @@ const Header = () => {
           <nav>
             <HStack spacing={4}>
               {socials.map((social, index) => (
-                <a key={index} href={social.link} aria-label={social.name}>
+                <a key={index} href={social.url} aria-label={social.name}>
                   <FontAwesomeIcon icon={social.icon} size="1x" />
                 </a>
               ))}
@@ -91,10 +94,10 @@ const Header = () => {
           </nav>
           <nav>
             <HStack spacing={8}>
-              <a href="/#projects" onClick={handleClick}>
+              <a href="/#projects" onClick={handleClick('projects')}>
                 Projects
               </a>
-              <a href="/#contact-me" onClick={handleClick}>
+              <a href="/#contact-me" onClick={handleClick('contactme')}>
                 Contact Me
               </a>
             </HStack>
